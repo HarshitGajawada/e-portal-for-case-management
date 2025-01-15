@@ -1,29 +1,23 @@
 import * as React from "react";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { ColorModeContext, useMode } from "../../themes";
-import { Box } from "@mui/material";
 import { CssBaseline, TextField, ThemeProvider } from "@mui/material";
 import { IconButton, useTheme } from "@mui/material";
-import { tokens } from "../../themes";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { Home } from "@mui/icons-material";
 import "./login.css";
 import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Changepassmodal from "./changepassmodal";
+import {Box} from "@mui/material";
 export default function SignIn() {
 
   const [theme, colorMode] = useMode();
@@ -41,9 +35,9 @@ export default function SignIn() {
 
   axios.defaults.withCredentials = true;
   const data = role === "defendant" ? { caseId, password, role } : { email, password, role };
-  const [passwordType, setPasswordType] = useState("password");
+  // const [passwordType, setPasswordType] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  // const [isClicked, setIsClicked] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const validateForm = () => {
     let isValid = true;

@@ -17,7 +17,6 @@ const steps = [
   "Plaintiff details",
   "Defendant details",
   "Preview",
-  "Payment",
 ];
 
 const Efiling = () => {

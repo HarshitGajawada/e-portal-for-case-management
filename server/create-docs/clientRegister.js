@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
     console.log(err.message);
   }
 });
-router.post("/set-password-client", async (req, res) => { 
+router.put("/set-password-client", async (req, res) => { 
   const token = req.query.token;
   const { password } = req.body;
   const client = await ClientData.findOne({ token });

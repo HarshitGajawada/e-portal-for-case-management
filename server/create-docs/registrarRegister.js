@@ -65,7 +65,7 @@ else{
 }
 })
 
-router.post("/set-password-registrar", async (req, res) => { 
+router.put("/set-password-registrar", async (req, res) => { 
   const token = req.query.token;
   const { password } = req.body;
   const registrar = await Registrar.findOne({ token });

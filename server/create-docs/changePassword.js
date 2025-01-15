@@ -9,35 +9,29 @@ const bcrypt = require("bcrypt");
 const ClientData = require("../models/clientData");
 
 router.post("/", async (req, res) => {
-    const user = await ClientData.findOne({
-        email: req.body.email,
-    });
+    const email=req.body.email;
+    const user = await ClientData.findOne({email});
     if (user) {
+      try{ 
         const token = crypto.randomBytes(20).toString("hex");
-        // console.log(token);
-        // console.log(req.body.email);
-        const newToken = await ClientData.findOneAndUpdate(
-            {email: req.body.email},
-            {token: token}, 
-            {new: true});
-        
-        try {
-            const suc = await sendEmail(req.body.email, "Change Password", "<h1>Change Password</h1><p>Click <a href='http://localhost:3000/client-change-password?token=" + token + "'>here</a> to change password</p>");
-            if (suc) {
-                res.status(200).json({ message: "Email sent successfully" });
-            }
-            else {
-                res.status(400).json({ message: "Email not sent" });
-            }
-        }
-        catch (err) {
-            console.log(err.message);
-            res.status(500).json({ message: err.message });
-        }
+        const suc = await sendEmail(email, "Set Password", "<h1>Set Password for Client</h1><p>Click <a href='http://localhost:3000/client-change-password?token=" + token + "'>here</a> to set password</p>");
+        const client = await ClientData.findOneAndUpdate(
+          { email },//find the judge with this email
+          { token },
+          { new: true } //return the updated document
+        );
+        res.status(200).send("Email sent successfully");
+      }
+      catch (error) {
+        console.log(error.message);
+      }
+    }
+    else{
+        res.status(400).send("Client not found")
     }
 });
 
-router.post("/client-change-password", async (req, res) => {
+router.put("/client-change-password", async (req, res) => {
     const token = req.query.token;
     const password = req.body.password;
     const client = await ClientData.findOne({ token });

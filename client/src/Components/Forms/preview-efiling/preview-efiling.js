@@ -156,6 +156,9 @@ const Preview = (props) => {
     } catch (err) {
       console.log(err.message);
     }
+    finally{
+      setLoading1(false)
+    }
   };
 
   return (
@@ -364,6 +367,7 @@ const Preview = (props) => {
         handleOpen={handleOpen}
         handleClose={handleClose}
         open={open}
+        message="submit"
         handleSubmit={handleSubmit}
       />
     </div>

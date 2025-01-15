@@ -18,7 +18,7 @@ const SetPassword = () => {
             const queryParams = new URLSearchParams(location.search);
             const token = queryParams.get('token');
 
-            const res = await axios.post("http://localhost:64000/judge-register/set-password-judge?token="+token,{password});
+            const res = await axios.put("http://localhost:64000/judge-register/set-password-judge?token="+token,{password});
             if(res.status === 200) {
                 setTimeout(() => { 
                     setError("");

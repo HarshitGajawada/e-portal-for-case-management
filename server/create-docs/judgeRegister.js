@@ -65,7 +65,7 @@ else{
 }
 })
 
-router.post("/set-password-judge", async (req, res) => { 
+router.put("/set-password-judge", async (req, res) => { 
   const token = req.query.token;
   const { password } = req.body;
   const judge = await Judge.findOne({ token });
