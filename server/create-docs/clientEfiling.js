@@ -236,7 +236,7 @@ router.post("/approve-case", async (req, res) => {
         }
         try {
           const suc1 = await sendEmail(email, "Case Approval", "<h1>Your Case has been Approved Succesfully. Your OS number is " + newCaseId+"</h1>");
-          const suc2 = await sendEmail(judge[0].email, "Case Approval", "<h1>Your have been allocated a case. OS number is " + newCaseId+"</h1>");
+          const suc2 = await sendEmail(judge[0].email, "Case Approval", "<h1>You have been allocated a case. OS number is " + newCaseId+"</h1>");
 
           if(suc1 && suc2){
             res.status(200).json({ message: "Email Sent Succesfully" });

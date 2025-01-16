@@ -140,7 +140,6 @@ router.post("/defendant-written-statement",upload.fields([{ name: 'writtenStatem
         },
             {new:true}
         )
-        res.status(200).json({message: "Written statement submitted successfully"});
         
         const judgeNames = approvedCase.judgeAssigned.split(",");
         const updatePromise4 = await judges.updateMany( 
@@ -158,6 +157,7 @@ router.post("/defendant-written-statement",upload.fields([{ name: 'writtenStatem
         },
         {new:true}
         )
+        res.status(200).json({message: "Written statement submitted successfully"});
 
     }catch(error) { 
         console.log(error.message);

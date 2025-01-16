@@ -115,59 +115,59 @@ router.get("/registrar-case-details", async (req, res) => {
 });
 
 //registrar allocation of cases
-router.get("/registrar-allocation-of-cases", async (req, res) => {
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 2;
-  const skip = (page - 1) * limit;
-  const search = req.query.search || "";
-  try {
-    let data;
-    const totalCount = await efiling.countDocuments({
-      status: "Pending for allocation of judge"});
-    if(search) {
-      data = await efiling
-      .find({
-        caseSensitivity: "High",
-        status: "Pending for allocation of judge",
-        $or: [
-          { caseId: new RegExp(search, "i") },
-          { "plaintDetails.caseCategory": new RegExp(search, "i") },
-          { "plaintDetails.caseSubCategory": new RegExp(search, "i") },
-        ]
-      })
-      .select([
-        "plaintDetails.caseCategory",
-        "plaintDetails.caseSubCategory",
-        "caseId",
-        "caseSensitivity",
-      ])
-      .skip(skip)
-      .limit(limit);
-    } else {
-      data = await efiling
-              .find({
-                caseSensitivity: "High",
-                status: "Pending for allocation of judge",
-              })
-              .select([
-                "plaintDetails.caseCategory",
-                "plaintDetails.caseSubCategory",
-                "caseId",
-                "caseSensitivity",
-              ])
-              .skip(skip)
-              .limit(limit);
-    }
-    if (data.length > 0) {
-      res.status(200).json({ data: data, totalCount: String(totalCount) });
-    } else {
-      res.status(400).json({ message: "No data found" });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ message: error.message });
-  }
-});
+// router.get("/registrar-allocation-of-cases", async (req, res) => {
+//   const page = Number(req.query.page) || 1;
+//   const limit = Number(req.query.limit) || 2;
+//   const skip = (page - 1) * limit;
+//   const search = req.query.search || "";
+//   try {
+//     let data;
+//     const totalCount = await efiling.countDocuments({
+//       status: "Pending for allocation of judge"});
+//     if(search) {
+//       data = await efiling
+//       .find({
+//         caseSensitivity: "High",
+//         status: "Pending for allocation of judge",
+//         $or: [
+//           { caseId: new RegExp(search, "i") },
+//           { "plaintDetails.caseCategory": new RegExp(search, "i") },
+//           { "plaintDetails.caseSubCategory": new RegExp(search, "i") },
+//         ]
+//       })
+//       .select([
+//         "plaintDetails.caseCategory",
+//         "plaintDetails.caseSubCategory",
+//         "caseId",
+//         "caseSensitivity",
+//       ])
+//       .skip(skip)
+//       .limit(limit);
+//     } else {
+//       data = await efiling
+//               .find({
+//                 caseSensitivity: "High",
+//                 status: "Pending for allocation of judge",
+//               })
+//               .select([
+//                 "plaintDetails.caseCategory",
+//                 "plaintDetails.caseSubCategory",
+//                 "caseId",
+//                 "caseSensitivity",
+//               ])
+//               .skip(skip)
+//               .limit(limit);
+//     }
+//     if (data.length > 0) {
+//       res.status(200).json({ data: data, totalCount: String(totalCount) });
+//     } else {
+//       res.status(400).json({ message: "No data found" });
+//     }
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 //registrar view details
 router.get("/registrar-view-details", async (req, res) => {

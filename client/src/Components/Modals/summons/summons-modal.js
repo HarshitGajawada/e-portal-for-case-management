@@ -82,7 +82,7 @@ function SummonModal(props) {
           text: `${caseDetails.defendantDetails.defendantAddress}\n${caseDetails.defendantDetails.defendantCity}\n${caseDetails.defendantDetails.defendantState}\n${caseDetails.defendantDetails.defendantPinCode}`,
         },
         {
-          text: `WHEREAS your attendance is necessary to answer to a charge of (state shortly the offence charged), you arehereby required to appear in person (or by pleader, as the case may be) before the (Magistrate) of on the ${date
+          text: `WHEREAS your attendance is necessary to answer to a charge of (state shortly the offence charged), you are hereby required to appear in person (or by pleader, as the case may be) before the (Magistrate) of on the ${date
             .toISOString()
             .substring(0, 10)}`,
         },

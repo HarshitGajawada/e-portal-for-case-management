@@ -9,6 +9,7 @@ import { set } from "mongoose";
 const DefendantCaseView = () => {
   const caseId = useContext(CaseIdContext);
   const [caseDetails, setCaseDetails] = useState([]);
+  const [uploadSuccess, setUploadSuccess] = useState({});
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [writtenStatement, setWrittenStatement] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,6 +51,7 @@ const DefendantCaseView = () => {
         if (res.status === 200) {
           setLoading(false);
           setReloadKey(reloadkey + 1);
+          setUploadSuccess({...uploadSuccess, [caseId]:true})
           alert("Written Statement submitted successfully");
           
         }
@@ -108,16 +110,17 @@ const DefendantCaseView = () => {
                         { loading && <CircularProgress style={{color:"white"}}/> }
                         <Button
                           variant="contained"
-                          color="success"
+                          color={uploadSuccess[item.caseId] ? "inherit" : "success"}
                           style={{
                             fontSize: "12px",
                             borderRadius: "5px",
                             marginTop: "5%",
+                            opacity: uploadSuccess[item.caseId] ? 0.8 : 1
                           }}
-                          disabled={loading}
+                          disabled={loading || uploadSuccess[item.caseId]}
                           onClick={handleUpload}
                         >
-                          Upload
+                          {uploadSuccess[item.caseId] ? "Uploaded" : "Upload"}
                         </Button>
                         </>
                       ) : null}
